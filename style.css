@@ -1,0 +1,46 @@
+.svg-container {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.heading  {
+    text-align: center;
+    font-size: 50px;
+    color: #3385ff;
+}
+#graph-svg {
+    border: 3px solid black;
+    border-radius: 20px;
+    box-shadow: 10px 0px 10px rgba(10, 0, 0, 5);
+}
+
+.btn-primary {
+    
+    background:#06944d;
+    font-style: bold;
+    border: 2px solid black;
+    border-radius: 40px;
+    color: white;
+    align-items: center;
+    height:40px;
+    width: 120px;
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.capacity-label {
+    fill: black;
+    pointer-events: none; 
+}
+
+.highlight {
+    stroke: yellow;
+    stroke-width: 4;
+    fill: rgb(189, 38, 38);
+}

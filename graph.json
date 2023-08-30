@@ -1,0 +1,21 @@
+{
+    "nodes": [
+        {"id": 0, "name": "s", "fixed": true, "x": 147, "y": 243},
+        {"id": 1, "name": "t", "fixed": true, "x": 764, "y": 254}, 
+        {"id": 2, "name": "v1","fixed": true, "x": 346, "y": 118},
+        {"id": 3, "name": "v2","fixed": true, "x": 380, "y": 300},
+        {"id": 4, "name": "v3","fixed": true, "x": 545, "y": 136},
+        {"id": 5, "name": "v4","fixed": true, "x": 599, "y": 309}
+    ],
+     "links": [
+        {"source": 0, "target": 2, "capacity": 16,"flow": 0, "residualCapacity":16},
+        {"source": 2, "target": 4, "capacity": 12,"flow": 0, "residualCapacity":12},
+        {"source": 4, "target": 1, "capacity": 20,"flow": 0, "residualCapacity":20},
+        {"source": 0, "target": 3, "capacity": 13,"flow": 0, "residualCapacity":13},
+        {"source": 3, "target": 5, "capacity": 14,"flow": 0, "residualCapacity":14},
+        {"source": 5, "target": 1, "capacity": 4,"flow": 0, "residualCapacity":4},
+        {"source": 3, "target": 2, "capacity": 4,"flow": 0, "residualCapacity":4},
+        {"source": 4, "target": 3, "capacity": 9,"flow": 0, "residualCapacity":9},
+        {"source": 5, "target": 4, "capacity": 7,"flow": 0, "residualCapacity":7}
+      ]
+}
