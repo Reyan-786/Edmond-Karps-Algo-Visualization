@@ -44,3 +44,22 @@
     stroke-width: 4;
     fill: rgb(189, 38, 38);
 }
+
+.My-text {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #333; 
+    line-height: 1.4; 
+    text-align: center;
+}
+
+.My-text a {
+    color: #0073e6; 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+
+.My-text a:hover {
+    color:#06944d;
+}

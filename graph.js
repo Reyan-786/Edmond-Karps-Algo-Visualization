@@ -1,5 +1,6 @@
 const svg = d3.select("#graph-svg");
 
+
     
 const graph = {
     "nodes": [
@@ -23,7 +24,18 @@ const graph = {
       ]
 }
 const totalNodeDiv = document.getElementById("displayTotalNodes");
+const arrowMarker = svg.append("defs")
+    .append("marker")
+    .attr("id", "arrow-marker")
+    .attr("markerWidth", 10)
+    .attr("markerHeight", 10)
+    .attr("refX", 8)
+    .attr("refY", 3)
+    .attr("orient", "auto");
 
+arrowMarker.append("path")
+    .attr("d", "M0,0 L0,6 L9,3 z")
+    .attr("fill", "red");
 
 totalNodeDiv.innerHTML = `Total Nodes : ${graph.nodes.length}`;
 totalNodeDiv.style.display = 'block';
@@ -35,12 +47,17 @@ const simulation = d3.forceSimulation(graph.nodes)
     .force("link",d3.forceLink(graph.links).distance(250))
     .force("center", d3.forceCenter(svg.attr("width") / 2, svg.attr("height") / 2));
 
-const links = svg.selectAll(".link")
+    const links = svg.selectAll(".link")
     .data(graph.links)
     .enter().append("line")
     .attr("class", "link")
     .attr("stroke", "red")
-    .attr("stroke-width", 2);
+    .attr("stroke-width", 2)
+    // .attr("marker-end", "url(#arrow-marker)")
+    // .attr("x1", d => graph.nodes[d.source].x)
+    // .attr("y1", d => graph.nodes[d.source].y)
+    // .attr("x2", d => graph.nodes[d.target].x)
+    // .attr("y2", d => graph.nodes[d.target].y);
 
 const linkFlowbyCapacity = svg.selectAll(".link-label")
         .data(graph.links)
@@ -263,24 +280,54 @@ function findLink(source,target,graph ) {
     return graph.links.find(link => link.source === source && link.target === target );
 }
 
+function updateGraphDisplay() {
+    alert("Now updating the graph with the modified Flow values!!");
+    // const links = svg.selectAll(".link"); // Select the links within the current graph state
+
+    // links.attr("x1", d => d.source.x)
+    //      .attr("y1", d => d.source.y)
+    //      .attr("x2", d => d.target.x)
+    //      .attr("y2", d => d.target.y);
+
+    const linkFlowbyCapacity = svg.selectAll(".link-label"); // Select the link labels within the current graph state
+    linkFlowbyCapacity.attr("x", d => (d.source.x + d.target.x) / 2)
+                     .attr("y", d => (d.source.y + d.target.y) / 2)
+                     .text(d => `${d.flow}/${d.capacity}`);
+    alert("Updated the flow values ");
+
+}
+
+
+
 function updateFlow(source, target, amount, graph) {
     const link = findLink(source, target, graph);
-    const reverseLink = findLink(target, source, graph);
     
+    // Log the current flow and capacity before the update
+    console.log("Before Update - Flow:", link.flow, "Capacity:", link.capacity);
+
     link.flow += amount;
     link.residualCapacity -= amount;
-
+    const reverseLink = findLink(target, source, graph);
+    
     if (reverseLink) {
         reverseLink.residualCapacity += amount;
     }
 
     // Update the SVG elements
     const edgeLabel = svg.select(`.link-label[source="${source}"][target="${target}"]`);
-    edgeLabel.text(`${link.flow}/${link.capacity}`);
+    edgeLabel.flow = link.flow;  // Update the flow value
+    edgeLabel.residualCapacity = link.residualCapacity; 
+
+    edgeLabel.text(() => `${link.flow}/${link.capacity}`);
+    // Log the updated flow and capacity
+    console.log("After Update - Flow:", link.flow, "Capacity:", link.capacity);
+
+    // Rest of your code
 }
 
 
-const animationDelay = 1000;
+
+const animationDelay = 2000;
 function animatePath(path) {
     let index = 0;
 
@@ -299,6 +346,7 @@ function animatePath(path) {
         } else {
             setTimeout(() => {
                 unhighlightPath(path);
+                updateGraphDisplay();
             }, animationDelay);
         }
     }
