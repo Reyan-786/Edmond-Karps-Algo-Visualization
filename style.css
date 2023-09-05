@@ -63,3 +63,35 @@
 .My-text a:hover {
     color:#06944d;
 }
+
+nav {
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0; /* Add some padding to the top and bottom for spacing */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Remove default list margin */
+}
+
+li {
+    display: inline;
+    margin-right: 20px;
+    font-size: 18px; /* Adjust the font size */
+}
+
+
+a {
+    text-decoration: none;
+    color: #333; /* Change link color */
+    transition: color 0.3s; /* Add a smooth color transition effect */
+}
+
+a:hover {
+    color: #555; /* Change link color on hover */
+}
