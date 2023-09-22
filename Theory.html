@@ -3,10 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Edmonds-Karp Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: #f0f0ff;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    This is the theory page
-    
+    <h1>Edmonds-Karp Algorithm for Maximum Flow</h1>
+
+    <p>The Edmonds-Karp algorithm is a widely-used method for finding the maximum flow in a flow network. It is based on the Ford-Fulkerson algorithm and uses the concept of augmenting paths to iteratively increase the flow in the network until no more augmenting paths can be found. The maximum flow represents the maximum amount of flow that can be sent from a source node to a sink node in the network.</p>
+
+    <h2>Flow Network</h2>
+
+    <p>Before diving into the algorithm, let's understand the components of a flow network:</p>
+
+    <ul>
+        <li>Nodes (Vertices): The network consists of nodes or vertices, including a source node (S) and a sink node (T).</li>
+        <li>Edges: Edges connect the nodes and are assigned capacities that represent the maximum flow that can pass through them.</li>
+        <li>Flow: Flow represents the amount of "stuff" (e.g., goods, data, etc.) passing through the network. It must satisfy certain constraints.</li>
+    </ul>
+
+    <h2>Algorithm Overview</h2>
+
+    <p>The Edmonds-Karp algorithm proceeds as follows:</p>
+
+    <ol>
+        <li>Initialize the flow in all edges to 0.</li>
+        <li>While there exists an augmenting path from the source (S) to the sink (T) in the residual graph:
+            <ul>
+                <li>Find an augmenting path using Breadth-First Search (BFS). An augmenting path is a path from S to T in which all edges have positive residual capacity.</li>
+                <li>Calculate the bottleneck capacity along the augmenting path. The bottleneck capacity is the minimum residual capacity of the edges in the path.</li>
+                <li>Increase the flow along the augmenting path by the bottleneck capacity. This is done by pushing flow from S to T along the path and updating the residual capacities accordingly.</li>
+            </ul>
+        </li>
+        <li>Repeat step 2 until no more augmenting paths can be found.</li>
+        <li>The algorithm will terminate, and the maximum flow in the network is equal to the total flow exiting the source node (S).</li>
+    </ol>
+
+    <h2>Residual Graph</h2>
+
+    <p>The residual graph is a crucial concept in the Edmonds-Karp algorithm. It represents the remaining capacity in the original flow network after flow has been sent along some paths. The residual capacity of an edge is the maximum additional flow that can be sent through that edge.</p>
+
+    <ul>
+        <li>Initially, the residual graph is the same as the original flow network.</li>
+        <li>As flow is pushed along augmenting paths, the residual capacities of edges are updated:
+            <ul>
+                <li>Forward edges: Their residual capacity decreases by the flow sent along them.</li>
+                <li>Backward edges: Their residual capacity increases by the flow sent along the corresponding forward edge.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Termination and Complexity</h2>
+
+    <p>The Edmonds-Karp algorithm terminates when no more augmenting paths can be found in the residual graph. Its time complexity is typically O(VE^2), where V is the number of vertices and E is the number of edges in the network. This complexity ensures that the algorithm runs efficiently for most practical networks.</p>
+
+    <h2>Applications</h2>
+
+    <p>The Edmonds-Karp algorithm has numerous applications, including network flow optimization in transportation, communication, and data networks. It can be used to solve problems like finding the maximum amount of data that can be transmitted through a network while respecting capacity constraints.</p>
+
+    <p>This algorithm plays a pivotal role in various computer science and operations research domains and continues to be an essential tool for solving flow network problems.</p>
+
+    <button back = 'back' class = 'btn btn-primary' onclick = 'GoToMain()'>Back</button>
+
+    <script >
+        function GoToMain() {
+            window.location.replace('index.html');
+        }
+    </script>
 </body>
 </html>
